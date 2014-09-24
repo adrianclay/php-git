@@ -1,0 +1,21 @@
+{
+    "name": "adrianclay/git",
+    "type": "library",
+    "description": "Parse git repositories in native PHP",
+    "keywords": [ "git", "native" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Clay",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "webignition/url": "1.9.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "adrianclay\\git\\": "src/"
+        }
+    }
+}
