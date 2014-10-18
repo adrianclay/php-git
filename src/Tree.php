@@ -44,7 +44,7 @@ class Tree implements SHAReference
 
     private function deconstructObject()
     {
-        $object = new Object( $this->repo, $this->reference );
+        $object = $this->repo->getObject( $this->reference );
         if ( $object->getType() != "tree" ) {
             throw new \InvalidArgumentException();
         }

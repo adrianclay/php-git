@@ -25,7 +25,7 @@ class Commit
     private $committer;
 
     /**
-     * @param Repository $repo
+     * @param Repository   $repo
      * @param SHAReference $reference
      */
     public function __construct( Repository $repo, SHAReference $reference )
@@ -63,7 +63,7 @@ class Commit
 
     private function deconstructObject()
     {
-        $object = new Object( $this->repo, $this->reference );
+        $object = $this->repo->getObject( $this->reference );
         if ( $object->getType() != "commit" ) {
             throw new \InvalidArgumentException();
         }

@@ -52,7 +52,11 @@ class StreamWrapper {
             return null;
         }
         $this->repository = $repo;
-        $reference = new Head( $repo, $url->getUser() );
+        if ( ctype_xdigit( $url->getUser() ) && strlen( $url->getUser() ) == 40 ) {
+            $reference = new SHA( $url->getUser() );
+        } else {
+            $reference = new Head( $repo, $url->getUser() );
+        }
         $commit = new Commit( $repo, $reference );
         $nextChild = $currentTree = $commit->getTree();
         $remainingParts = array_filter( explode( '/', $url->getPath()->get() ) );
@@ -98,7 +102,7 @@ class StreamWrapper {
         if ( !$blobSha ) {
             return false;
         }
-        if ( $mode != "r" ) {
+        if ( $mode != "r" && $mode != "rb" ) {
             return false;
         }
         $this->blob = new Blob( $this->repository, $blobSha );
@@ -176,10 +180,11 @@ class StreamWrapper {
     public function dir_readdir()
     {
         /** @var Tree\Entry $entry */
-        $entry = next( $this->fileListing );
+        $entry = current( $this->fileListing );
         if ( $entry === false ) {
             return false;
         }
+        next( $this->fileListing );
         return $entry->getFilename();
     }
 
