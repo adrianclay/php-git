@@ -10,15 +10,11 @@ class RepositoryTest extends PHPUnit_Framework_TestCase
     /** @var \adrianclay\git\Repository */
     private $repository;
 
-    /** @var \adrianclay\git\Head */
-    private $head;
-
     public function setUp()
     {
         parent::setUp();
         $path = __DIR__ . '/../';
         $this->repository = new Repository( $path );
-        $this->head = new \adrianclay\git\Head( $this->repository );
     }
 
     public function testCommitGetParent()
@@ -70,17 +66,6 @@ class RepositoryTest extends PHPUnit_Framework_TestCase
     {
         $gitIgnore = new Blob( $this->repository, new \adrianclay\git\SHA( self::GIT_IGNORE_BLOB_SHA ) );
         $this->assertEquals( "vendor/", $gitIgnore->getContents() );
-    }
-
-    public function testHead()
-    {
-        new Commit( $this->repository, $this->head );
-    }
-
-    public function testHeadMaster()
-    {
-        $master = new \adrianclay\git\Head( $this->repository, "master" );
-        $this->assertEquals( $this->head->getSHA(), $master->getSHA() );
     }
 
     public function testBadRef()
