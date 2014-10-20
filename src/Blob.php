@@ -35,7 +35,7 @@ class Blob
     private function deconstructObject()
     {
         $object = $this->repo->getObject( $this->reference );
-        if ( $object->getType() != "blob" ) {
+        if ( $object->getType() != Object::TYPE_BLOB ) {
             throw new \InvalidArgumentException();
         }
         $this->data = $object->getData();

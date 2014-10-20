@@ -7,6 +7,9 @@ class Repository {
     /** @var string */
     private $path;
 
+    /** @var Pack[] */
+    private $packs = [];
+
     /**
      * @param string $path
      * @throws \InvalidArgumentException
@@ -16,6 +19,9 @@ class Repository {
         $this->path = realpath( $path );
         if ( $this->path === false ) {
             throw new \InvalidArgumentException;
+        }
+        foreach( glob( $this->getObjectDirectory() . DIRECTORY_SEPARATOR . 'pack' . DIRECTORY_SEPARATOR .'pack-*.pack' ) as $pack ) {
+            $this->packs[] = new Pack( $pack );
         }
     }
 
@@ -36,7 +42,12 @@ class Repository {
         if ( file_exists( $objPath = $this->getLooseObjectPath( $reference ) ) ) {
             return new LooseObject( $objPath );
         }
-        throw new \InvalidArgumentException();
+        foreach( $this->packs as $pack ) {
+            if ( $packObject = $pack->getObject( $reference ) ) {
+                return $packObject;
+            }
+        }
+        return null;
     }
 
     /**

@@ -82,4 +82,10 @@ class RepositoryTest extends PHPUnit_Framework_TestCase
         $master = new \adrianclay\git\Head( $this->repository, "master" );
         $this->assertEquals( $this->head->getSHA(), $master->getSHA() );
     }
+
+    public function testBadRef()
+    {
+        $badObject = $this->repository->getObject( new \adrianclay\git\SHA( "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" ) );
+        $this->assertNull( $badObject );
+    }
 }
