@@ -55,7 +55,9 @@ class Signature
     {
         preg_match( '@^(?P<name>.*) (<(?P<email>.*)>)? (?P<timestamp>[0-9]+) (?<offset>[\+|-][0-9]{4})$@', $oneLiner, $matches );
         $dateTime = new \DateTime( '@' . $matches['timestamp'] );
-        $dateTime->setTimezone( new \DateTimeZone( $matches['offset'] ) );
+        // Workaround for https://bugs.php.net/bug.php?id=45528
+        $offsetTimezone = \DateTime::createFromFormat( 'O', $matches['offset'] )->getTimezone();
+        $dateTime->setTimezone( $offsetTimezone );
         return new Signature( $matches['name'], $matches['email'], $dateTime );
     }
 }
