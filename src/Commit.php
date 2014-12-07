@@ -54,6 +54,22 @@ class Commit
     }
 
     /**
+     * @return Signature
+     */
+    public function getAuthor()
+    {
+        return Signature::parseSignature( $this->author );
+    }
+
+    /**
+     * @return Signature
+     */
+    public function getCommitter()
+    {
+        return Signature::parseSignature( $this->committer );
+    }
+
+    /**
      * @return string
      */
     public function getMessage()

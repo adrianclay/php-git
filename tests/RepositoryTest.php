@@ -38,6 +38,24 @@ class RepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @depends testCommit
+     * @param adrianclay\git\Commit $initialCommit
+     */
+    public function testCommitter( Commit $initialCommit )
+    {
+        $this->assertNotEmpty( $initialCommit->getCommitter() );
+    }
+
+    /**
+     * @depends testCommit
+     * @param adrianclay\git\Commit $initialCommit
+     */
+    public function testAuthor( Commit $initialCommit )
+    {
+        $this->assertNotEmpty( $initialCommit->getAuthor() );
+    }
+
+    /**
      * @depends testCommitGetParent
      * @param Commit $commit
      */
