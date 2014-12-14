@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 80f3de79356430966c66559828d553ff1ba5a76b Adrian Clay <adieclay@gmail.com> 1411583368 +0100	commit (initial): Initial commit.
+80f3de79356430966c66559828d553ff1ba5a76b 95e4f60b09e7d6c60bd909f208b1e011c7507675 Adrian Clay <adieclay@gmail.com> 1411584156 +0100	commit: Added PHPUnit
+95e4f60b09e7d6c60bd909f208b1e011c7507675 dc901a2fc3f2b0286f70230a7038db77814ce67d Adrian Clay <adieclay@gmail.com> 1411584233 +0100	commit: Now with added Travis
+dc901a2fc3f2b0286f70230a7038db77814ce67d edb8f373a0875217ed1190dad0e636640c03fdf6 Adrian Clay <adieclay@gmail.com> 1411585322 +0100	commit: Initial README
+edb8f373a0875217ed1190dad0e636640c03fdf6 4a87e8bcbe4272529f449ccaf36bfa41c1c844b3 Adrian Clay <adieclay@gmail.com> 1413662995 +0100	commit: Refactored Object model. Added some unit tests.
