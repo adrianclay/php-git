@@ -16,10 +16,7 @@ class Repository {
      */
     public function __construct( $path )
     {
-        $this->path = realpath( $path );
-        if ( $this->path === false ) {
-            throw new \InvalidArgumentException;
-        }
+        $this->path = $path;
         foreach( glob( $this->getObjectDirectory() . DIRECTORY_SEPARATOR . 'pack' . DIRECTORY_SEPARATOR .'pack-*.pack' ) as $pack ) {
             $this->packs[] = new Pack( $pack );
         }

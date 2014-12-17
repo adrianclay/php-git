@@ -1,10 +1,8 @@
 <?php
 
-use adrianclay\git\Blob;
-use adrianclay\git\Commit;
-use adrianclay\git\Repository;
+namespace adrianclay\git;
 
-class RepositoryTest extends PHPUnit_Framework_TestCase
+class RepositoryTest extends \PHPUnit_Framework_TestCase
 {
     const GIT_IGNORE_BLOB_SHA = "a725465aee245635a2bd129af54858ed32c84cb8";
     /** @var \adrianclay\git\Repository */
@@ -27,7 +25,7 @@ class RepositoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @depends testCommitGetParent
-     * @param adrianclay\git\Commit $commit
+     * @param Commit $commit
      * @return Commit
      */
     public function testCommit( Commit $commit )
@@ -39,7 +37,7 @@ class RepositoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @depends testCommit
-     * @param adrianclay\git\Commit $initialCommit
+     * @param Commit $initialCommit
      */
     public function testCommitter( Commit $initialCommit )
     {
@@ -48,7 +46,7 @@ class RepositoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @depends testCommit
-     * @param adrianclay\git\Commit $initialCommit
+     * @param Commit $initialCommit
      */
     public function testAuthor( Commit $initialCommit )
     {
