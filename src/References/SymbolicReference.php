@@ -28,6 +28,6 @@ class SymbolicReference implements SHAReference
      */
     public function getSHA()
     {
-        return iterator_to_array( $this->refs )[$this->refLink]->getSHA();
+        return $this->refs->getReference( $this->refLink )->getSHA();
     }
 }

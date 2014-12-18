@@ -6,9 +6,12 @@ class References implements \IteratorAggregate
 {
     const HEAD = 'HEAD';
 
-    /** @var \adrianclay\git\Repository */
+    /** @var Repository */
     private $repo;
 
+    /**
+     * @param Repository $repo
+     */
     public function __construct( Repository $repo )
     {
         $this->repo = $repo;
@@ -40,6 +43,15 @@ class References implements \IteratorAggregate
             }
         };
         return new \ArrayIterator( $looseObjects );
+    }
+
+    /**
+     * @param string $name
+     * @return SHAReference
+     */
+    public function getReference( $name )
+    {
+        return iterator_to_array( $this )[$name];
     }
 
     /**
