@@ -52,11 +52,7 @@ class StreamWrapper {
             return null;
         }
         $this->repository = $repo;
-        if ( ctype_xdigit( $url->getUser() ) && strlen( $url->getUser() ) == 40 ) {
-            $reference = new SHA( $url->getUser() );
-        } else {
-            $reference = new Head( $repo, $url->getUser() );
-        }
+        $reference = new RevisionResolver( new References\Parser( $repo ), $url->getUser() );
         $commit = new Commit( $repo, $reference );
         $nextChild = $currentTree = $commit->getTree();
         $remainingParts = array_filter( explode( '/', $url->getPath()->get() ) );
