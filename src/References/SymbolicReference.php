@@ -14,8 +14,8 @@ class SymbolicReference implements SHAReference
     private $refLink;
 
     /**
-     * @param References   $refs
-     * @param string $refLink
+     * @param References $refs
+     * @param            $refLink
      */
     public function __construct( References $refs, $refLink )
     {

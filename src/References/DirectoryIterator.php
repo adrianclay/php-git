@@ -2,7 +2,6 @@
 
 namespace adrianclay\git\References;
 
-use adrianclay\git\References;
 use adrianclay\git\SHAReference;
 
 class DirectoryIterator implements \Iterator
@@ -13,14 +12,14 @@ class DirectoryIterator implements \Iterator
     /** @var string */
     private $refsPath;
 
-    /** @var References */
+    /** @var Parser */
     private $refs;
 
     /**
-     * @param References   $refs
+     * @param Parser   $refs
      * @param string $refsPath
      */
-    public function __construct( References $refs, $refsPath )
+    public function __construct( Parser $refs, $refsPath )
     {
         $this->refs = $refs;
         $this->refsPath = $refsPath;

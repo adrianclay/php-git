@@ -1,10 +1,12 @@
 <?php
 
-namespace adrianclay\git;
+namespace adrianclay\git\References;
 
+use adrianclay\git\References;
+use adrianclay\git\Repository;
 use org\bovigo\vfs\vfsStream;
 
-class ReferencesTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends \PHPUnit_Framework_TestCase
 {
     const TEST_SHA = 'abababababababababababababababab';
 
@@ -12,7 +14,7 @@ class ReferencesTest extends \PHPUnit_Framework_TestCase
 
     public function testGetHead()
     {
-        $this->assertRefsHasRef( $this->getReferences( [ References::HEAD => self::TEST_SHA ] ), References::HEAD, self::TEST_SHA );
+        $this->assertRefsHasRef( $this->getReferences( [ References::HEAD => self::TEST_SHA ] ), Parser::HEAD, self::TEST_SHA );
     }
 
     public function testGetMaster()
@@ -72,23 +74,23 @@ class ReferencesTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $gitDir
-     * @return References
+     * @return Parser
      */
     private function getReferences( array $gitDir )
     {
         vfsStream::setup( 'root', null, [ '.git' => $gitDir ] );
         $repo = new Repository( vfsStream::url( 'root' ) );
-        $refs = new References( $repo );
+        $refs = new Parser( $repo );
         $this->assertInstanceOf( 'Traversable', $refs );
         return $refs;
     }
 
     /**
-     * @param References   $refs
+     * @param Parser $refs
      * @param string $ref
      * @param string $sha
      */
-    public function assertRefsHasRef( References $refs, $ref, $sha )
+    public function assertRefsHasRef( Parser $refs, $ref, $sha )
     {
         $refsArray = iterator_to_array( $refs, true );
         $this->assertArrayHasKey( $ref, $refsArray );
