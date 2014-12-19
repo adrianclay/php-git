@@ -29,6 +29,8 @@ class ReferencesArray implements \IteratorAggregate, References
      */
     public function getReference( $name )
     {
-        return $this->references[$name];
+        if ( array_key_exists( $name, $this->references ) ) {
+            return $this->references[$name];
+        }
     }
 }
