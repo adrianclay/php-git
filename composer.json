@@ -15,7 +15,8 @@
         "webignition/url": "1.9.13"
     },
     "require-dev": {
-        "mikey179/vfsStream": "1.4.0"
+        "mikey179/vfsStream": "1.4.0",
+        "phpunit/phpunit": "~4.8|~5.7"
     },
     "autoload": {
         "psr-4": {
