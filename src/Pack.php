@@ -38,7 +38,7 @@ class Pack
 
     /**
      * @param SHAReference $reference
-     * @return \adrianclay\git\Object
+     * @return \adrianclay\git\GitObject
      */
     public function getObject( SHAReference $reference )
     {
@@ -52,7 +52,7 @@ class Pack
     /**
      *
      * @param int $packOffset
-     * @return \adrianclay\git\Object
+     * @return \adrianclay\git\GitObject
      */
     private function readObjectAtOffset( $packOffset )
     {
@@ -64,7 +64,7 @@ class Pack
             $parent = $this->readObjectAtOffset( $packOffset - $baseOffset );
             return new Pack\Delta( $parent, $encodedDelta );
         } else {
-            return new Pack\Object( $this->readZlibData( $size ), $type );
+            return new Pack\CompleteObject( $this->readZlibData( $size ), $type );
         }
     }
 

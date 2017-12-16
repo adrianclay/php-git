@@ -2,7 +2,7 @@
 namespace adrianclay\git;
 
 
-class LooseObject implements Object
+class LooseObject implements GitObject
 {
     /** @var string */
     private $data;

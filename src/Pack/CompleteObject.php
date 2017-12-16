@@ -3,7 +3,7 @@ namespace adrianclay\git\Pack;
 
 use adrianclay\git\Pack;
 
-class Object implements \adrianclay\git\Object
+class CompleteObject implements \adrianclay\git\GitObject
 {
     /** @var string */
     private $data;

@@ -80,7 +80,7 @@ class Commit
     private function deconstructObject()
     {
         $object = $this->repo->getObject( $this->reference );
-        if ( $object->getType() != Object::TYPE_COMMIT ) {
+        if ( $object->getType() != GitObject::TYPE_COMMIT ) {
             throw new \InvalidArgumentException();
         }
         $data = $object->getData();

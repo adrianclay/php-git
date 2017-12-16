@@ -1,7 +1,7 @@
 <?php
 namespace adrianclay\git;
 
-interface Object
+interface GitObject
 {
     const TYPE_COMMIT = 'commit';
     const TYPE_BLOB = 'blob';

@@ -1,6 +1,7 @@
 <?php
 namespace adrianclay\git\Pack;
 
+use adrianclay\git\GitObject;
 use adrianclay\git\SHAReference;
 
 class Index
@@ -46,7 +47,7 @@ class Index
         }
 
         $fileOffset = self::SIZE_HEADER + self::FANOUT_TABLE_ENTRIES * self::FANOUT_TABLE_ENTRY_SIZE
-                + $this->getNumberSHATableEntries() * ( Object::SHA_BIN_SIZE + self::CRC_TABLE_ENTRY_SIZE )
+                + $this->getNumberSHATableEntries() * ( GitObject::SHA_BIN_SIZE + self::CRC_TABLE_ENTRY_SIZE )
                 + $tableIndex * self::OFFSET_TABLE_ENTRY_SIZE;
 
         fseek( $this->fileResource, $fileOffset );
@@ -72,10 +73,10 @@ class Index
         for ( $i = $linearSearchStart; $i < $linearSearchStop; $i++ ) {
 
             $fileOffset = self::SIZE_HEADER + self::FANOUT_TABLE_ENTRIES * self::FANOUT_TABLE_ENTRY_SIZE
-                    + $i * Object::SHA_BIN_SIZE;
+                    + $i * GitObject::SHA_BIN_SIZE;
 
             fseek( $this->fileResource, $fileOffset );
-            $hashComparison = strcmp( fread( $this->fileResource, Object::SHA_BIN_SIZE ), $binSHA );
+            $hashComparison = strcmp( fread( $this->fileResource, GitObject::SHA_BIN_SIZE ), $binSHA );
             if ( $hashComparison < 0 ) {
                 continue;
             } elseif ( $hashComparison == 0 ) {

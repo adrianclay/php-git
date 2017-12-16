@@ -32,7 +32,7 @@ class Repository {
 
     /**
      * @param SHAReference $reference
-     * @return \adrianclay\git\Object
+     * @return \adrianclay\git\GitObject
      */
     public function getObject( SHAReference $reference )
     {

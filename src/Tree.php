@@ -45,7 +45,7 @@ class Tree implements SHAReference
     private function deconstructObject()
     {
         $object = $this->repo->getObject( $this->reference );
-        if ( $object->getType() != Object::TYPE_TREE ) {
+        if ( $object->getType() != GitObject::TYPE_TREE ) {
             throw new \InvalidArgumentException();
         }
         $dataBuffer = $object->getData();
@@ -53,8 +53,8 @@ class Tree implements SHAReference
         while ( strlen( $dataBuffer ) ) {
             list( $mode, $dataBuffer ) = explode( ' ', $dataBuffer, 2 );
             list( $filename, $dataBuffer ) = explode( chr( 0 ), $dataBuffer, 2 );
-            $shaHash = bin2hex( substr( $dataBuffer, 0, Object::SHA_BIN_SIZE ) );
-            $dataBuffer = substr( $dataBuffer, Object::SHA_BIN_SIZE );
+            $shaHash = bin2hex( substr( $dataBuffer, 0, GitObject::SHA_BIN_SIZE ) );
+            $dataBuffer = substr( $dataBuffer, GitObject::SHA_BIN_SIZE );
 
             $this->files[] = new Entry( $mode, $filename, new SHA( $shaHash ) );
         }

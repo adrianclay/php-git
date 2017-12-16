@@ -2,9 +2,9 @@
 namespace adrianclay\git\Pack;
 
 
-class Delta implements \adrianclay\git\Object
+class Delta implements \adrianclay\git\GitObject
 {
-    /** @var \adrianclay\git\Object */
+    /** @var \adrianclay\git\GitObject */
     protected $base;
 
     /** @var string */
@@ -14,10 +14,10 @@ class Delta implements \adrianclay\git\Object
     protected $deltaOffset;
 
     /**
-     * @param \adrianclay\git\Object $base
+     * @param \adrianclay\git\GitObject $base
      * @param                        $delta
      */
-    public function __construct( \adrianclay\git\Object $base, $delta )
+    public function __construct(\adrianclay\git\GitObject $base, $delta )
     {
         $this->base = $base;
         $this->delta = $delta;
