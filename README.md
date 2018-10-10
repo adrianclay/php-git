@@ -4,6 +4,8 @@ GIT
 [![Build Status](https://travis-ci.org/adrianclay/php-git.svg?branch=master)](https://travis-ci.org/adrianclay/php-git)
 
 
+Some changes.
+
 Usage
 -----
 
