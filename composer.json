@@ -11,8 +11,9 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "webignition/url": "2.1"
+        "php": ">=7.1.0",
+        "webignition/url": "2.1",
+        "ext-zlib": "*"
     },
     "require-dev": {
         "mikey179/vfsStream": "1.6.5",
