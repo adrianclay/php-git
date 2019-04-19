@@ -17,7 +17,7 @@ class ReferencesArrayTest extends TestCase
     /** @var ReferencesArray */
     private $references;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->testSha = new SHA( 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' );
