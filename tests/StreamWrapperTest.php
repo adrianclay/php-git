@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class StreamWrapperTest extends TestCase
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         $repoDirectory = __DIR__ . '/../';

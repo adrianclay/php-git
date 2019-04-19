@@ -10,7 +10,7 @@ class RepositoryTest extends TestCase
     /** @var \adrianclay\git\Repository */
     private $repository;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $path = __DIR__ . '/../';

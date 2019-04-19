@@ -8,7 +8,7 @@ class ReflogTest extends TestCase
     /** @var Reflog */
     private $reflog;
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->reflog = new Reflog( __DIR__ . '/fixtures/reflog-head' );
     }
