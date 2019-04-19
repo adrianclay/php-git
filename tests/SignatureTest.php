@@ -2,7 +2,9 @@
 
 namespace adrianclay\git;
 
-class SignatureTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class SignatureTest extends TestCase
 {
     public function testParseSignature()
     {

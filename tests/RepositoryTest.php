@@ -2,7 +2,9 @@
 
 namespace adrianclay\git;
 
-class RepositoryTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class RepositoryTest extends TestCase
 {
     const GIT_IGNORE_BLOB_SHA = "a725465aee245635a2bd129af54858ed32c84cb8";
     /** @var \adrianclay\git\Repository */

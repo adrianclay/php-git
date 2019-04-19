@@ -2,7 +2,9 @@
 
 namespace adrianclay\git;
 
-class StreamWrapperTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class StreamWrapperTest extends TestCase
 {
     public static function setUpBeforeClass()
     {

@@ -1,7 +1,9 @@
 <?php
 namespace adrianclay\git;
 
-class ReflogTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ReflogTest extends TestCase
 {
     /** @var Reflog */
     private $reflog;

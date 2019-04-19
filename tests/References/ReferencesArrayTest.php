@@ -4,8 +4,9 @@ namespace adrianclay\git\References;
 
 use adrianclay\git\References;
 use adrianclay\git\SHA;
+use PHPUnit\Framework\TestCase;
 
-class ReferencesArrayTest extends \PHPUnit_Framework_TestCase
+class ReferencesArrayTest extends TestCase
 {
     /** @var SHA */
     private $testSha;

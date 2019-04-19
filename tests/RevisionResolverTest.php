@@ -3,8 +3,9 @@
 namespace adrianclay\git;
 
 use adrianclay\git\References\ReferencesArray;
+use PHPUnit\Framework\TestCase;
 
-class RevisionResolverTest extends \PHPUnit_Framework_TestCase
+class RevisionResolverTest extends TestCase
 {
     private $sha = "abcdefabcdefabcdefabcdefabcdefabcdefabcd";
 

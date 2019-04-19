@@ -5,8 +5,9 @@ namespace adrianclay\git\References;
 use adrianclay\git\References;
 use adrianclay\git\Repository;
 use org\bovigo\vfs\vfsStream;
+use PHPUnit\Framework\TestCase;
 
-class ParserTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
     const TEST_SHA = 'abababababababababababababababab';
 
