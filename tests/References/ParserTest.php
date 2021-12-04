@@ -11,41 +11,41 @@ class ParserTest extends TestCase
 {
     const TEST_SHA = 'abababababababababababababababab';
 
-    const REF_MASTER = 'refs/heads/master';
+    const REF_MAIN = 'refs/heads/main';
 
     public function testGetHead()
     {
         $this->assertRefsHasRef( $this->getReferences( [ References::HEAD => self::TEST_SHA ] ), Parser::HEAD, self::TEST_SHA );
     }
 
-    public function testGetMaster()
+    public function testGetMain()
     {
-        $refs = $this->getReferences( [ 'refs' => [ 'heads' => [ 'master' => self::TEST_SHA ] ] ] );
-        $this->assertRefsHasRef( $refs, self::REF_MASTER, self::TEST_SHA );
+        $refs = $this->getReferences( [ 'refs' => [ 'heads' => [ 'main' => self::TEST_SHA ] ] ] );
+        $this->assertRefsHasRef( $refs, self::REF_MAIN, self::TEST_SHA );
     }
 
-    public function testGetMasterWithTrailingNewLine()
+    public function testGetMainWithTrailingNewLine()
     {
-        $refs = $this->getReferences( [ 'refs' => [ 'heads' => [ 'master' => self::TEST_SHA . "\n" ] ] ] );
-        $this->assertRefsHasRef( $refs, self::REF_MASTER, self::TEST_SHA );
+        $refs = $this->getReferences( [ 'refs' => [ 'heads' => [ 'main' => self::TEST_SHA . "\n" ] ] ] );
+        $this->assertRefsHasRef( $refs, self::REF_MAIN, self::TEST_SHA );
     }
 
     public function testSymbolicRefHead()
     {
-        $refs = $this->getReferences( [ References::HEAD => 'ref: refs/heads/master', 'refs' => [ 'heads' => [ 'master' => self::TEST_SHA ] ] ] );
+        $refs = $this->getReferences( [ References::HEAD => 'ref: refs/heads/main', 'refs' => [ 'heads' => [ 'main' => self::TEST_SHA ] ] ] );
         $this->assertRefsHasRef( $refs, References::HEAD, self::TEST_SHA );
     }
 
     public function testSymbolicRef()
     {
-        $refs = $this->getReferences( [ 'refs' => [ 'heads' => [ 'master' => self::TEST_SHA, 'test' => 'ref: refs/heads/master' ] ] ] );
+        $refs = $this->getReferences( [ 'refs' => [ 'heads' => [ 'main' => self::TEST_SHA, 'test' => 'ref: refs/heads/main' ] ] ] );
         $this->assertRefsHasRef( $refs, 'refs/heads/test', self::TEST_SHA );
     }
 
     public function testPackedRef()
     {
-        $refs = $this->getReferences( [ 'packed-refs' => self::TEST_SHA . ' ' . self::REF_MASTER ] );
-        $this->assertRefsHasRef( $refs, self::REF_MASTER, self::TEST_SHA );
+        $refs = $this->getReferences( [ 'packed-refs' => self::TEST_SHA . ' ' . self::REF_MAIN ] );
+        $this->assertRefsHasRef( $refs, self::REF_MAIN, self::TEST_SHA );
     }
 
     public function testStalePackedRef()
@@ -60,16 +60,16 @@ class ParserTest extends TestCase
     public function testPackedRefFileWithComment()
     {
         $packedRefs  = "# pack-refs with: peeled\n";
-        $packedRefs .= self::TEST_SHA . ' ' . self::REF_MASTER;
+        $packedRefs .= self::TEST_SHA . ' ' . self::REF_MAIN;
         $refs = $this->getReferences( [ 'packed-refs' => $packedRefs ] );
-        $this->assertRefsHasRef( $refs, self::REF_MASTER, self::TEST_SHA );
+        $this->assertRefsHasRef( $refs, self::REF_MAIN, self::TEST_SHA );
         $this->assertCount( 1, $refs->getIterator() );
     }
 
     public function testPackedRefFileWithTrailingNewLine()
     {
-        $refs = $this->getReferences( [ 'packed-refs' => self::TEST_SHA . ' ' . self::REF_MASTER . "\n" ] );
-        $this->assertRefsHasRef( $refs, self::REF_MASTER, self::TEST_SHA );
+        $refs = $this->getReferences( [ 'packed-refs' => self::TEST_SHA . ' ' . self::REF_MAIN . "\n" ] );
+        $this->assertRefsHasRef( $refs, self::REF_MAIN, self::TEST_SHA );
         $this->assertCount( 1, $refs->getIterator() );
     }
 

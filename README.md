@@ -19,12 +19,12 @@ That hostname then refers to your local git repository, which can be used when c
 $filePath = "git://branch@hostname/path/under/version/control";
 ```
 
-Example extracting all files within the src folder pointed to by the master branch:
+Example extracting all files within the src folder pointed to by the main branch:
 
 ```php
 use adrianclay\git\StreamWrapper;
 StreamWrapper::registerRepository( $phpGitRepo, 'adrianclay.php-git' );
-var_dump( scandir( 'git://master@adrianclay.php-git/src' ) );
+var_dump( scandir( 'git://main@adrianclay.php-git/src' ) );
 
 array(9) {
   [0] =>

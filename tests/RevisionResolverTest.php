@@ -19,15 +19,15 @@ class RevisionResolverTest extends TestCase
         $this->assertEqualSHA( $this->getResolver( [ References::HEAD => new SHA( $this->sha ) ], References::HEAD ) );
     }
 
-    public function testMaster()
+    public function testMain()
     {
-        $this->assertEqualSHA( $this->getResolver( [ 'refs/heads/master' => new SHA( $this->sha ) ], 'master' ) );
+        $this->assertEqualSHA( $this->getResolver( [ 'refs/heads/main' => new SHA( $this->sha ) ], 'main' ) );
     }
 
-    public function testOriginMaster()
+    public function testOriginMain()
     {
-        $references = [ 'refs/remotes/origin/master' => new SHA( $this->sha ) ];
-        $this->assertEqualSHA( $this->getResolver( $references, 'origin/master' ) );
+        $references = [ 'refs/remotes/origin/main' => new SHA( $this->sha ) ];
+        $this->assertEqualSHA( $this->getResolver( $references, 'origin/main' ) );
     }
 
     /**
