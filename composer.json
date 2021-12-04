@@ -12,7 +12,6 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "webignition/url": "~2.1",
         "ext-zlib": "*"
     },
     "require-dev": {

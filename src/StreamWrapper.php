@@ -1,8 +1,6 @@
 <?php
 namespace adrianclay\git;
 
-use webignition\NormalisedUrl\NormalisedUrl;
-
 class StreamWrapper {
 
     const PROTOCOL = "git";
@@ -46,16 +44,16 @@ class StreamWrapper {
      */
     private function getSHAOfPath( $path )
     {
-        $url = new NormalisedUrl( $path );
-        $repo = self::getRepository( $url->getHost()->get() );
+        $parts = \parse_url( $path );
+        $repo = self::getRepository( $parts['host'] );
         if ( !$repo ) {
             return null;
         }
         $this->repository = $repo;
-        $reference = new RevisionResolver( new References\Parser( $repo ), $url->getUser() );
+        $reference = new RevisionResolver( new References\Parser( $repo ), $parts['user'] );
         $commit = new Commit( $repo, $reference );
         $nextChild = $currentTree = $commit->getTree();
-        $remainingParts = array_filter( explode( '/', $url->getPath()->get() ) );
+        $remainingParts = array_filter( explode( '/', $parts['path'] ?? '' ) );
         while( $remainingParts ) {
             $currentPart = array_shift( $remainingParts );
             $matchingChildren = array_filter( $currentTree->getFiles(), function( Tree\Entry $file ) use ( $currentPart ) {
