@@ -1,7 +1,7 @@
 GIT
 ====
 
-[![Build Status](https://travis-ci.org/adrianclay/php-git.svg?branch=master)](https://travis-ci.org/adrianclay/php-git)
+[![PHP Composer](https://github.com/adrianclay/php-git/actions/workflows/php.yml/badge.svg)](https://github.com/adrianclay/php-git/actions/workflows/php.yml)
 
 
 Usage
