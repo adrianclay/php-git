@@ -11,12 +11,12 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=7.3.0",
         "ext-zlib": "*"
     },
     "require-dev": {
         "mikey179/vfsstream": "1.6.10",
-        "phpunit/phpunit": "~7.5 || ~9.0"
+        "phpunit/phpunit": "~9.0"
     },
     "autoload": {
         "psr-4": {
