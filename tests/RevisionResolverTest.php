@@ -24,6 +24,11 @@ class RevisionResolverTest extends TestCase
         $this->assertEqualSHA( $this->getResolver( [ 'refs/heads/main' => new SHA( $this->sha ) ], 'main' ) );
     }
 
+    public function testNumericRefIsDereferenced()
+    {
+        $this->assertEqualSHA( $this->getResolver( [ 'refs/heads/1111' => new SHA( $this->sha ) ], '1111' ) );
+    }
+
     public function testOriginMain()
     {
         $references = [ 'refs/remotes/origin/main' => new SHA( $this->sha ) ];
