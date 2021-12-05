@@ -22,4 +22,10 @@ class IndexTest extends TestCase
         $object = $this->repository->getObject( $sha );
         $this->assertNotNull( $object );
     }
+
+    public function testGivenPhpFileThrowsInvalidException() {
+        $this->expectException(\InvalidArgumentException::class);
+
+        new Index(__FILE__);
+    }
 }
