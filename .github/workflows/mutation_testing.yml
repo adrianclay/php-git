@@ -34,3 +34,9 @@ jobs:
 
     - name: Run test suite
       run: ./vendor/bin/infection --threads=2
+
+    - name: Archive mutation results
+      uses: actions/upload-artifact@v2
+      with:
+        name: Mutation log
+        path: infection.log
