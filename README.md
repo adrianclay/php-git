@@ -1,11 +1,9 @@
-GIT
-====
+# GIT
 
 [![PHP Composer](https://github.com/adrianclay/php-git/actions/workflows/php.yml/badge.svg)](https://github.com/adrianclay/php-git/actions/workflows/php.yml)
 
 
-Usage
------
+## Usage
 
 First register your repository path against a hostname.
 
@@ -47,3 +45,14 @@ array(9) {
   string(8) "Tree.php"
 }
 ```
+
+## Development
+
+### Prerequisites
+
+- [PHP](https://www.php.net)
+- [Composer](https://getcomposer.org)
+
+`$ composer install`
+
+`$ composer exec phpunit`
