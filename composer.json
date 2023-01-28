@@ -16,7 +16,7 @@
     },
     "require-dev": {
         "infection/infection": "^0.18",
-        "mikey179/vfsstream": "1.6.10",
+        "mikey179/vfsstream": "1.6.11",
         "phpunit/phpunit": "~9.0"
     },
     "autoload": {
