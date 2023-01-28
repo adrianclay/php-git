@@ -6,10 +6,6 @@ interface References extends \Traversable
 {
     const HEAD = 'HEAD';
 
-    /**
-     * @param string $name
-     * @return SHAReference
-     */
-    public function getReference( $name );
+    public function getReference( string $name ): ?SHAReference;
 
 }

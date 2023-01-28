@@ -24,10 +24,6 @@ class Commit
     /** @var string */
     private $committer;
 
-    /**
-     * @param Repository   $repo
-     * @param SHAReference $reference
-     */
     public function __construct( Repository $repo, SHAReference $reference )
     {
         $this->repo = $repo;
@@ -35,10 +31,7 @@ class Commit
         $this->deconstructObject();
     }
 
-    /**
-     * @return Tree
-     */
-    public function getTree()
+    public function getTree(): Tree
     {
         return new Tree( $this->repo, new SHA( $this->tree ) );
     }
@@ -46,38 +39,29 @@ class Commit
     /**
      * @return Commit[]
      */
-    public function getParents()
+    public function getParents(): array
     {
         return array_map( function ( $parentReference ) {
             return new Commit( $this->repo, $parentReference );
         }, $this->parents );
     }
 
-    /**
-     * @return Signature
-     */
-    public function getAuthor()
+    public function getAuthor(): Signature
     {
         return Signature::parseSignature( $this->author );
     }
 
-    /**
-     * @return Signature
-     */
-    public function getCommitter()
+    public function getCommitter(): Signature
     {
         return Signature::parseSignature( $this->committer );
     }
 
-    /**
-     * @return string
-     */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
 
-    private function deconstructObject()
+    private function deconstructObject(): void
     {
         $object = $this->repo->getObject( $this->reference );
         if ( $object->getType() != GitObject::TYPE_COMMIT ) {

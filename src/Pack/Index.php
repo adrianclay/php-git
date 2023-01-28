@@ -23,10 +23,7 @@ class Index
     /** @var resource */
     private $fileResource;
 
-    /**
-     * @param string $idxPath
-     */
-    public function __construct( $idxPath )
+    public function __construct( string $idxPath )
     {
         $this->fileResource = fopen( $idxPath, 'r' );
         if ( self::MAGIC_VALUE . self::VERSION_TWO !== fread( $this->fileResource, self::SIZE_HEADER ) ) {
@@ -36,10 +33,9 @@ class Index
     }
 
     /**
-     * @param SHAReference $reference
-     * @return int|null
+     * @throws \Exception
      */
-    public function getPackFileOffset( SHAReference $reference )
+    public function getPackFileOffset( SHAReference $reference ): ?int
     {
         $tableIndex = $this->getTableIndexFromReference( $reference );
         if ( $tableIndex === null ) {
@@ -60,11 +56,7 @@ class Index
         return $offset;
     }
 
-    /**
-     * @param SHAReference $reference
-     * @return int|null
-     */
-    private function getTableIndexFromReference( SHAReference $reference )
+    private function getTableIndexFromReference( SHAReference $reference ): ?int
     {
         $binSHA = hex2bin( $reference->getSHA() );
         $fanoutIndex = ord( $binSHA[0] );
@@ -88,10 +80,7 @@ class Index
         return null;
     }
 
-    /**
-     * @return int
-     */
-    private function getNumberSHATableEntries()
+    private function getNumberSHATableEntries(): int
     {
         return $this->fanoutTable[self::FANOUT_TABLE_ENTRIES - 1];
     }

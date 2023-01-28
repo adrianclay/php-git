@@ -12,15 +12,12 @@ class Parser implements \IteratorAggregate, References
     /** @var Repository */
     private $repo;
 
-    /**
-     * @param Repository $repo
-     */
     public function __construct( Repository $repo )
     {
         $this->repo = $repo;
     }
 
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         $iterator = new \AppendIterator();
         $headFile = $this->repo->getGitPath() . DIRECTORY_SEPARATOR . self::HEAD;
@@ -48,20 +45,12 @@ class Parser implements \IteratorAggregate, References
         return new \ArrayIterator( $looseObjects );
     }
 
-    /**
-     * @param string $name
-     * @return SHAReference
-     */
-    public function getReference( $name )
+    public function getReference( string $name ): ?SHAReference
     {
         return \iterator_to_array( $this )[$name];
     }
 
-    /**
-     * @param string $refString
-     * @return SHAReference
-     */
-    public function parseRefString( $refString )
+    public function parseRefString( string $refString ): SHAReference
     {
         $refString = \trim( $refString );
         if ( \preg_match( '@^ref: (?<ref>.+)$@', $refString, $matches ) ) {
@@ -70,11 +59,7 @@ class Parser implements \IteratorAggregate, References
         return new SHA( $refString );
     }
 
-    /**
-     * @param $line
-     * @return bool
-     */
-    private function isLineAComment( $line )
+    private function isLineAComment( string $line ): bool
     {
         return empty( $line ) || $line[0] == '#';
     }

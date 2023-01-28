@@ -18,19 +18,16 @@ class ReferencesArray implements \IteratorAggregate, References
         $this->references = $references;
     }
 
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator( $this->references );
     }
 
-    /**
-     * @param string $name
-     * @return SHAReference
-     */
-    public function getReference( $name )
+    public function getReference( string $name ): ?SHAReference
     {
         if ( array_key_exists( $name, $this->references ) ) {
             return $this->references[$name];
         }
+        return null;
     }
 }

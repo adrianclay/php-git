@@ -11,27 +11,17 @@ class CompleteObject implements \adrianclay\git\GitObject
     /** @var int */
     private $type;
 
-    /**
-     * @param string $data
-     * @param int    $type
-     */
-    public function __construct( $data, $type) {
+    public function __construct( string $data, int $type) {
         $this->data = $data;
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
-    public function getData()
+    public function getData(): string
     {
         return $this->data;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         switch( $this->type ) {
             case Pack::TYPE_COMMIT:

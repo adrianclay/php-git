@@ -13,20 +13,13 @@ class SymbolicReference implements SHAReference
     /** @var string */
     private $refLink;
 
-    /**
-     * @param References $refs
-     * @param            $refLink
-     */
-    public function __construct( References $refs, $refLink )
+    public function __construct( References $refs, string $refLink )
     {
         $this->refs = $refs;
         $this->refLink = $refLink;
     }
 
-    /**
-     * @return string
-     */
-    public function getSHA()
+    public function getSHA(): string
     {
         return $this->refs->getReference( $this->refLink )->getSHA();
     }

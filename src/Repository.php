@@ -14,7 +14,7 @@ class Repository {
      * @param string $path
      * @throws \InvalidArgumentException
      */
-    public function __construct( $path )
+    public function __construct( string $path )
     {
         $this->path = $path;
         foreach( glob( $this->getObjectDirectory() . DIRECTORY_SEPARATOR . 'pack' . DIRECTORY_SEPARATOR .'pack-*.pack' ) as $pack ) {
@@ -22,19 +22,12 @@ class Repository {
         }
     }
 
-    /**
-     * @return string
-     */
-    public function getGitPath()
+    public function getGitPath(): string
     {
         return $this->path . '/.git';
     }
 
-    /**
-     * @param SHAReference $reference
-     * @return \adrianclay\git\GitObject
-     */
-    public function getObject( SHAReference $reference )
+    public function getObject( SHAReference $reference ): ?GitObject
     {
         if ( file_exists( $objPath = $this->getLooseObjectPath( $reference ) ) ) {
             return new LooseObject( $objPath );
@@ -47,21 +40,14 @@ class Repository {
         return null;
     }
 
-    /**
-     * @param SHAReference $reference
-     * @return string
-     */
-    private function getLooseObjectPath( SHAReference $reference )
+    private function getLooseObjectPath( SHAReference $reference ): string
     {
         $d = DIRECTORY_SEPARATOR;
         $hash = $reference->getSHA();
         return $this->getObjectDirectory() . $d . substr( $hash, 0, 2 ) . $d . substr( $hash, 2 );
     }
 
-    /**
-     * @return string
-     */
-    private function getObjectDirectory()
+    private function getObjectDirectory(): string
     {
         return $this->getGitPath() . DIRECTORY_SEPARATOR . 'objects';
     }

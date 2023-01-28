@@ -20,10 +20,9 @@ class Pack
     private $fileResource;
 
     /**
-     * @param string $path
      * @throws \InvalidArgumentException
      */
-    public function __construct( $path )
+    public function __construct( string $path )
     {
         $this->index = new Pack\Index( preg_replace( '@.pack$@', '.idx', $path ) );
         $this->fileResource = fopen( $path, 'r' );
@@ -37,10 +36,9 @@ class Pack
     }
 
     /**
-     * @param SHAReference $reference
-     * @return \adrianclay\git\GitObject
+     * @throws \Exception
      */
-    public function getObject( SHAReference $reference )
+    public function getObject( SHAReference $reference ): ?GitObject
     {
         $packOffset = $this->index->getPackFileOffset( $reference );
         if ( $packOffset === null ) {
@@ -49,12 +47,7 @@ class Pack
         return $this->readObjectAtOffset( $packOffset );
     }
 
-    /**
-     *
-     * @param int $packOffset
-     * @return \adrianclay\git\GitObject
-     */
-    private function readObjectAtOffset( $packOffset )
+    private function readObjectAtOffset( int $packOffset ): GitObject
     {
         fseek( $this->fileResource, $packOffset );
         list( $size, $type ) = $this->readSizeAndTypeOfEntry();
@@ -68,11 +61,7 @@ class Pack
         }
     }
 
-    /**
-     *
-     * @return array
-     */
-    private function readSizeAndTypeOfEntry()
+    private function readSizeAndTypeOfEntry(): array
     {
         $encodedByte = ord( fgetc( $this->fileResource ) );
         $size = $encodedByte & 0b00001111;
@@ -86,21 +75,14 @@ class Pack
         return array( $size, $type );
     }
 
-    /**
-     * @param int $decompressedLength
-     * @return string
-     */
-    private function readZlibData( $decompressedLength )
+    private function readZlibData( int $decompressedLength ): string
     {
         $compressedLength = max( $decompressedLength * 2, 100 );
         $compressedData = fread( $this->fileResource, $compressedLength );
         return zlib_decode( $compressedData, $decompressedLength );
     }
 
-    /**
-     * @return int
-     */
-    private function readDeltaBaseOffset()
+    private function readDeltaBaseOffset(): int
     {
         $encodedOffset = ord( fgetc( $this->fileResource ) );
         $baseOffset = $encodedOffset & 0b01111111;

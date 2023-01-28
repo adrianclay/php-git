@@ -11,10 +11,9 @@ class LooseObject implements GitObject
     private $type;
 
     /**
-     * @param string $path
      * @throws \Exception
      */
-    public function __construct( $path )
+    public function __construct( string $path )
     {
         $data = zlib_decode( file_get_contents( $path ) );
         $nullPos = strpos( $data, "\0" );
@@ -25,18 +24,12 @@ class LooseObject implements GitObject
         }
     }
 
-    /**
-     * @return string
-     */
-    public function getData()
+    public function getData(): string
     {
         return $this->data;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }

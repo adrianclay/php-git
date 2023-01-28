@@ -15,38 +15,24 @@ class Entry implements SHAReference
     /** @var \adrianclay\git\SHA */
     private $shaHash;
 
-    /**
-     * @param int $mode
-     * @param string $filename
-     * @param SHA $shaHash
-     */
-    public function __construct( $mode, $filename, SHA $shaHash )
+    public function __construct( int $mode, string $filename, SHA $shaHash )
     {
         $this->mode = $mode;
         $this->filename = $filename;
         $this->shaHash = $shaHash;
     }
 
-    /**
-     * @return bool
-     */
-    public function isTree()
+    public function isTree(): bool
     {
         return $this->mode < 100000;
     }
 
-    /**
-     * @return string
-     */
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->filename;
     }
 
-    /**
-     * @return string
-     */
-    public function getSHA()
+    public function getSHA(): string
     {
         return $this->shaHash->getSHA();
     }

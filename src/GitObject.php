@@ -10,9 +10,7 @@ interface GitObject
     const SHA_BIN_SIZE = 20;
     const SHA_HEX_SIZE = 40;
 
-    /** @return string */
-    public function getType();
+    public function getType(): string;
 
-    /** @return string */
-    public function getData();
+    public function getData(): string;
 }

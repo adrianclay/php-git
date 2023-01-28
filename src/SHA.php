@@ -8,18 +8,12 @@ class SHA implements SHAReference
     /** @var string */
     private $sha;
 
-    /**
-     * @param string $sha
-     */
-    public function __construct( $sha )
+    public function __construct( string $sha )
     {
         $this->sha = $sha;
     }
 
-    /**
-     * @return string
-     */
-    public function getSHA()
+    public function getSHA(): string
     {
         return $this->sha;
     }

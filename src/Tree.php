@@ -15,10 +15,6 @@ class Tree implements SHAReference
     private $files = array();
 
 
-    /**
-     * @param Repository $repo
-     * @param SHAReference $reference
-     */
     public function __construct( Repository $repo, SHAReference $reference )
     {
         $this->repo = $repo;
@@ -29,15 +25,12 @@ class Tree implements SHAReference
     /**
      * @return Tree\Entry[]
      */
-    public function getFiles()
+    public function getFiles(): array
     {
         return $this->files;
     }
 
-    /**
-     * @return string
-     */
-    public function getSHA()
+    public function getSHA(): string
     {
         return $this->reference->getSHA();
     }

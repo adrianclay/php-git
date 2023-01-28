@@ -9,11 +9,9 @@ class StreamWrapper {
     private static $repositoryMappings = array();
 
     /**
-     * @param string $path
-     * @param string $hostname
      * @throws \InvalidArgumentException
      */
-    public static function registerRepository( $path, $hostname )
+    public static function registerRepository( string $path, string $hostname )
     {
         if ( array_key_exists( $hostname, self::$repositoryMappings ) ) {
             throw new \InvalidArgumentException( "$hostname is already registered." );
@@ -23,11 +21,7 @@ class StreamWrapper {
         $registered = stream_wrapper_register( self::PROTOCOL, __CLASS__ );
     }
 
-    /**
-     * @param string $hostname
-     * @return \adrianclay\git\Repository
-     */
-    private static function getRepository( $hostname )
+    private static function getRepository( string $hostname ): Repository
     {
         return self::$repositoryMappings[$hostname];
     }
@@ -38,11 +32,8 @@ class StreamWrapper {
 
     /**
      * Returns the blob or tree corresponding to a path
-     *
-     * @param string $path
-     * @return SHAReference|null
      */
-    private function getSHAOfPath( $path )
+    private function getSHAOfPath( string $path ): ?SHAReference
     {
         $parts = \parse_url( $path );
         $repo = self::getRepository( $parts['host'] );
@@ -83,14 +74,7 @@ class StreamWrapper {
     /** @var int */
     private $position = 0;
 
-    /**
-     * @param string $path
-     * @param string $mode
-     * @param int $options
-     * @param string $opened_path
-     * @return bool
-     */
-    public function stream_open( $path, $mode, $options, &$opened_path )
+    public function stream_open( string $path, string $mode, int $options, ?string &$opened_path ): bool
     {
         $blobSha = $this->getSHAOfPath( $path );
         if ( !$blobSha ) {
@@ -103,37 +87,24 @@ class StreamWrapper {
         return true;
     }
 
-    /**
-     * @param int $count
-     * @return string
-     */
-    public function stream_read( $count )
+    public function stream_read( int $count ): string
     {
         $read = substr( $this->blob->getContents(), $this->position, $count );
         $this->position += strlen( $read );
         return $read;
     }
 
-    /**
-     * @return int
-     */
-    public function stream_tell()
+    public function stream_tell(): int
     {
         return $this->position;
     }
 
-    /**
-     * @return bool
-     */
-    public function stream_eof()
+    public function stream_eof(): bool
     {
         return $this->position >= strlen( $this->blob->getContents() );
     }
 
-    /**
-     * @return array
-     */
-    public function stream_stat()
+    public function stream_stat(): array
     {
         return array();
     }
@@ -150,11 +121,7 @@ class StreamWrapper {
 
     }
 
-    /**
-     * @param string $path
-     * @return bool
-     */
-    public function dir_opendir( $path )
+    public function dir_opendir( string $path ): bool
     {
         $treeSha = $this->getSHAOfPath( $path );
         if ( !$treeSha ) {

@@ -13,11 +13,7 @@ class Delta implements \adrianclay\git\GitObject
     /** @var int */
     protected $deltaOffset;
 
-    /**
-     * @param \adrianclay\git\GitObject $base
-     * @param                        $delta
-     */
-    public function __construct(\adrianclay\git\GitObject $base, $delta )
+    public function __construct( \adrianclay\git\GitObject $base, string $delta )
     {
         $this->base = $base;
         $this->delta = $delta;
@@ -25,9 +21,8 @@ class Delta implements \adrianclay\git\GitObject
 
     /**
      * @throws \InvalidArgumentException
-     * @return string
      */
-    public function getData()
+    public function getData(): string
     {
         $this->deltaOffset = 0;
         $baseData = $this->base->getData();
@@ -54,18 +49,12 @@ class Delta implements \adrianclay\git\GitObject
         return $decompressedData;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->base->getType();
     }
 
-    /**
-     * @return int
-     */
-    private function parseLength()
+    private function parseLength(): int
     {
         $shift = 0;
         $length = 0;
@@ -77,29 +66,17 @@ class Delta implements \adrianclay\git\GitObject
         return $length;
     }
 
-    /**
-     * @return int
-     */
-    private function consumeByte()
+    private function consumeByte(): int
     {
         return ord( $this->delta[$this->deltaOffset++] );
     }
 
-    /**
-     * @param $deltaCommand
-     * @return bool
-     */
-    private function isCopyCommand( $deltaCommand )
+    private function isCopyCommand( int $deltaCommand ): bool
     {
         return (bool) ( $deltaCommand & 0b10000000 );
     }
 
-    /**
-     * @param int    $deltaCommand
-     * @param string $baseData
-     * @return string
-     */
-    private function copyFromBaseData( $deltaCommand, $baseData )
+    private function copyFromBaseData( int $deltaCommand, string $baseData ): string
     {
         $copyOffset = 0;
         for ( $i = 0; $i < 4; $i++ ) {

@@ -15,47 +15,34 @@ class DirectoryIterator implements \Iterator
     /** @var Parser */
     private $refs;
 
-    /**
-     * @param Parser   $refs
-     * @param string $refsPath
-     */
-    public function __construct( Parser $refs, $refsPath )
+    public function __construct( Parser $refs, string $refsPath )
     {
         $this->refs = $refs;
         $this->refsPath = $refsPath;
         $this->directoryIterator = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $this->refsPath, \FilesystemIterator::KEY_AS_PATHNAME | \FilesystemIterator::SKIP_DOTS ) );
     }
 
-    /**
-     * @return SHAReference
-     */
-    public function current()
+    public function current(): SHAReference
     {
         return $this->refs->parseRefString( file_get_contents( $this->directoryIterator->current() ) );
     }
 
-    public function next()
+    public function next(): void
     {
         $this->directoryIterator->next();
     }
 
-    /**
-     * @return string
-     */
-    public function key()
+    public function key(): string
     {
         return substr( $this->directoryIterator->key(), strlen( $this->refsPath ) - 4 );
     }
 
-    /**
-     * @return bool
-     */
-    public function valid()
+    public function valid(): bool
     {
         return $this->directoryIterator->valid();
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->directoryIterator->rewind();
     }

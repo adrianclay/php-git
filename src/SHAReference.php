@@ -4,9 +4,6 @@ namespace adrianclay\git;
 
 interface SHAReference {
 
-    /**
-     * @return string
-     */
-    public function getSHA();
+    public function getSHA(): string;
 
 }

@@ -11,47 +11,29 @@ class Signature
     /** @var \DateTime */
     private $dateTime;
 
-    /**
-     * @param string    $name
-     * @param string    $email
-     * @param \DateTime $dateTime
-     */
-    public function __construct( $name, $email, $dateTime )
+    public function __construct( string $name, string $email, \DateTime $dateTime )
     {
         $this->name = $name;
         $this->email = $email;
         $this->dateTime = $dateTime;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getDateTime()
+    public function getDateTime(): \DateTime
     {
         return $this->dateTime;
     }
 
-    /**
-     * @param string $oneLiner
-     * @return Signature
-     */
-    public static function parseSignature( $oneLiner )
+    public static function parseSignature( string $oneLiner ): Signature
     {
         preg_match( '@^(?P<name>.*) (<(?P<email>.*)>)? (?P<timestamp>[0-9]+) (?<offset>[\+|-][0-9]{4})$@', $oneLiner, $matches );
         $dateTime = new \DateTime( '@' . $matches['timestamp'] );

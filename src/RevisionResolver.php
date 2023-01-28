@@ -10,20 +10,13 @@ class RevisionResolver implements SHAReference
     /** @var References */
     private $references;
 
-    /**
-     * @param References $references
-     * @param string     $revision
-     */
-    public function __construct( References $references, $revision )
+    public function __construct( References $references, string $revision )
     {
         $this->references = $references;
         $this->revision = $revision;
     }
 
-    /**
-     * @return string
-     */
-    public function getSHA()
+    public function getSHA(): string
     {
         if ( ctype_xdigit( $this->revision ) && strlen( $this->revision ) == 40 ) {
             return $this->revision;

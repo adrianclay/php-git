@@ -13,10 +13,6 @@ class Blob
     /** @var string */
     private $data;
 
-    /**
-     * @param Repository   $repo
-     * @param SHAReference $reference
-     */
     public function __construct( Repository $repo, SHAReference $reference )
     {
         $this->repo = $repo;
@@ -24,10 +20,7 @@ class Blob
         $this->deconstructObject();
     }
 
-    /**
-     * @return string
-     */
-    public function getContents()
+    public function getContents(): string
     {
         return $this->data;
     }

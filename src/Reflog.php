@@ -7,10 +7,7 @@ class Reflog implements \IteratorAggregate
     /** @var resource */
     private $filePointer;
 
-    /**
-     * @param string $filePath
-     */
-    public function __construct( $filePath )
+    public function __construct( string $filePath )
     {
         $this->filePointer = fopen( $filePath, 'r' );
     }
@@ -18,7 +15,7 @@ class Reflog implements \IteratorAggregate
     /**
      * @return Reflog\Entry[]
      */
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         \fseek( $this->filePointer, 0 );
         $entries = [];
