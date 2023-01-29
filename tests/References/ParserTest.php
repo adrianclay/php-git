@@ -42,6 +42,12 @@ class ParserTest extends TestCase
         $this->assertRefsHasRef( $refs, 'refs/heads/test', self::TEST_SHA );
     }
 
+    public function testGetReferencesReturnsNull()
+    {
+        $refs = $this->getReferences( [ 'refs' => [] ] );
+        $this->assertNull($refs->getReference('fake_ref'));
+    }
+
     public function testPackedRef()
     {
         $refs = $this->getReferences( [ 'packed-refs' => self::TEST_SHA . ' ' . self::REF_MAIN ] );

@@ -47,7 +47,7 @@ class Parser implements \IteratorAggregate, References
 
     public function getReference( string $name ): ?SHAReference
     {
-        return \iterator_to_array( $this )[$name];
+        return \iterator_to_array( $this )[$name] ?? null;
     }
 
     public function parseRefString( string $refString ): SHAReference
